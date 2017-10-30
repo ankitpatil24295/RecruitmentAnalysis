@@ -47,6 +47,8 @@ public class JoinedEmplyoeeServlet extends HttpServlet {
 		List<Interview> getshortlistedApplicantByJoiningStatus = interviewService
 				.getshortlistedApplicantByJoiningStatus();
 		
+		request.setAttribute("getshortlistedApplicantByJoiningStatus",getshortlistedApplicantByJoiningStatus);
+
 		// Change The position status opened or closed using this method
 		PositionService positionService=new PositionServiceImplementation();
 		positionService.changePositionStatusFromJoiningStatus();
