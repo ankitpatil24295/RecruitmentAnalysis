@@ -21,14 +21,21 @@ body {
 		
 	%>
 	<form  action="PostInDBServlet">
-	    <font style="padding-left: 300px">PostionID :</font> <input  type="text" name="pid"><br> <br>
-		<font style="padding-left: 300px">Hr_id :</font><input name="hrid" value="<%=request.getParameter("id")%>" readonly="readonly"><br> <br>
-		<font style="padding-left: 300px">Postion_name :</font> <input type="text" name="pname"><br> <br>
-		<font style="padding-left: 300px">No_of_Postion :</font> <input type="text" name="noofpos"><br> <br>
-		<font style="padding-left: 300px">Experience_required :</font> <input type="text" name="expreq"><br>
-		<br>
-		<font style="padding-left: 300px"> position_status: <input type="text" name="statuspost"><br>
-		<br> <a style="padding-left: 300px"><input type="submit" value="Post Position"></a>
+	<table align="center">
+	   <tr>
+	   <th></th>
+	   <th></th>
+	   </tr> 
+	    
+	    <tr><td>PostionID:</td><td><input  type="text" name="pid"></td></tr>
+		<tr><td>Hr_id :</td><td><input name="hrid" value="<%=request.getParameter("id")%>" readonly="readonly"></td></tr>
+		<tr><td>Postion_name :</td><td> <input type="text" name="pname"></td></tr>
+		<tr><td>No_of_Postion :</td><td> <input type="text" name="noofpos"></td></tr>
+		<tr><td>Experience_required :</td><td> <input type="text" name="expreq"></td></tr>
+		<tr><td>position_status:</td><td> <input type="text" name="statuspost"></td></tr>
+		<tr><td><a><input type="submit" value="Post Position"></a></td></tr>
+
+</table>
 	</form>
 </body>
 </html>

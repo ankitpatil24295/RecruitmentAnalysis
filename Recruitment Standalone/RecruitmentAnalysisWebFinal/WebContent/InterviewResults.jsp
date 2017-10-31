@@ -8,8 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
-
+<style>
+body {
+        color: white;
+}
+</style>
+<body bgcolor="gray">
+<h1 align="center"><b>Interview Given By</b></h1>
+<br>
+<hr>
+<br>
 	<TABLE border="2" align="center">
 		<TR>
 			<TH>Applicant_id</TH>
@@ -33,7 +41,7 @@
 
 			<TD><%=apply.getPosition().getPositionName()%></TD>
 			<TD><a
-				href="updateInterview.jsp?postId=<%=apply.getPosition().getPositionId()%>&appId=<%=apply.getApplicant().getApplicantId()%>">shedule and Result</a></TD>
+				href="updateInterview.jsp?postId=<%=apply.getPosition().getPositionId()%>&appId=<%=apply.getApplicant().getApplicantId()%>"><font style="color: white"><b>Interview Entry</b></font></a></TD>
 		</TR>
 		<%
 			}

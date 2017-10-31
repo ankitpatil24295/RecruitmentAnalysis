@@ -35,25 +35,20 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	private static final String COL_POSITION_STATUS = "position_status";
 
 	// add position data in position table
-	private String insertQuery = "INSERT INTO " + TBL_NAME
-			+ " values(?,?,?,?,?,?,?)";
+	private String insertQuery = "INSERT INTO " + TBL_NAME + " values(?,?,?,?,?,?,?)";
 
 	// delete data from table on the basis of position id
-	private String deleteQuery = "DELETE FROM " + TBL_NAME + " WHERE "
-			+ COL_POSITION_ID + "=?";
+	private String deleteQuery = "DELETE FROM " + TBL_NAME + " WHERE " + COL_POSITION_ID + "=?";
 
 	// update data in table on the basis of position id
-	private String updateQuery = "UPDATE " + TBL_NAME + " SET " + COL_HR_ID
-			+ "=?," + COL_POSITION_NAME + "=?,"
+	private String updateQuery = "UPDATE " + TBL_NAME + " SET " + COL_HR_ID + "=?," + COL_POSITION_NAME + "=?,"
 
-			+ COL_NO_OF_POSITION + "=?," + COL_EXPERIENCE_REQUIRED + "=?,"
-			+ COL_POSITION_POST_DATE + "=?,"
+			+ COL_NO_OF_POSITION + "=?," + COL_EXPERIENCE_REQUIRED + "=?," + COL_POSITION_POST_DATE + "=?,"
 
 			+ COL_POSITION_STATUS + "=? " + " WHERE " + COL_POSITION_ID + "=?";
 
 	// List data on the basis of position id
-	private String searchpost = "SELECT * FROM " + TBL_NAME + " WHERE "
-			+ COL_POSITION_ID + "=?";
+	private String searchpost = "SELECT * FROM " + TBL_NAME + " WHERE " + COL_POSITION_ID + "=?";
 
 	// List all data of position table
 	private String searchAllpost = "SELECT * FROM " + TBL_NAME;
@@ -65,7 +60,13 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	 * database
 	 * 
 	 * @param position
-	 * @return
+	 * @return Position
+	 * @exception NullPointerException
+	 *                if connection is not found
+	 * @exception SQLException
+	 *                if syntax of query is wrong
+	 *                
+	 * 
 	 */
 
 	@Override
@@ -104,7 +105,11 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	 * the basis of positionId
 	 * 
 	 * @param positionId
-	 * @return
+	 * @return Single position detail 
+	 * @exception NullPointerException
+	 *                if connection is not found
+	 * @exception SQLException
+	 *                if syntax of query is wrong
 	 */
 
 	@Override
@@ -112,8 +117,7 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 
 		logger.debug("START");
 		try {
-			PreparedStatement statement = connection
-					.prepareStatement(searchpost);
+			PreparedStatement statement = connection.prepareStatement(searchpost);
 			statement.setInt(1, positionId);
 			resultSet = statement.executeQuery();
 
@@ -142,7 +146,11 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	/**
 	 * {@code getPosition()} retrieves all position lists from position table
 	 * 
-	 * @return
+	 * @return get all positions
+	 * @exception NullPointerException
+	 *                if connection is not found
+	 * @exception SQLException
+	 *                if syntax of query is wrong
 	 */
 	@Override
 	public List<Position> getPositions() {
@@ -151,8 +159,7 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 		List<Position> positionlists = new ArrayList<Position>();
 
 		try {
-			PreparedStatement pstat = connection
-					.prepareStatement(searchAllpost);
+			PreparedStatement pstat = connection.prepareStatement(searchAllpost);
 
 			ResultSet resultSet = pstat.executeQuery();
 
@@ -185,7 +192,11 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	 * {@code updatePosition()} Updates each attribute in the Position table
 	 * 
 	 * @param position
-	 * @return
+	 * @return boolean true if it is updated otherwise retrun false
+	 * @exception NullPointerException
+	 *                if connection is not found
+	 * @exception SQLException
+	 *                if syntax of query is wrong
 	 */
 	@Override
 	public boolean updatePosition(Position position) {
@@ -194,8 +205,7 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 		try {
 			PreparedStatement pstat = connection.prepareStatement(updateQuery);
 
-			Position positionInDB = new PositionDAOImplementation()
-					.getPosition(position.getPositionId());
+			Position positionInDB = new PositionDAOImplementation().getPosition(position.getPositionId());
 			logger.debug(positionInDB);
 			if (position.getHr().getHrId() == 0) {
 				Hr hr = new Hr();
@@ -206,8 +216,7 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 				position.setPositionName(positionInDB.getPositionName());
 
 			if (position.getPositionExperience() == 0)
-				position.setPositionExperience(positionInDB
-						.getPositionExperience());
+				position.setPositionExperience(positionInDB.getPositionExperience());
 
 			if (position.getPositionPostDate() == null)
 				position.setPositionPostDate(positionInDB.getPositionPostDate());
@@ -232,7 +241,7 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 
 			e.printStackTrace();
 		}
-		 logger.debug("END");
+		logger.debug("END");
 		return false;
 
 	}
@@ -241,7 +250,11 @@ public class PositionDAOImplementation implements PositionDAOInterface {
 	 * {@code deletePosition()}delete each Position from position table
 	 * 
 	 * @param positionId
-	 * @return
+	 * @return position
+	 * @exception NullPointerException
+	 *                if connection is not found
+	 * @exception SQLException
+	 *                if syntax of query is wrong
 	 */
 	@Override
 	public Position deletePosition(int positionId) {

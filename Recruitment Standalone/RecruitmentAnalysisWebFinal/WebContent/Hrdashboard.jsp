@@ -11,7 +11,7 @@ body {
 }
 </style>
 </head>
-<body bgcolor="brown">
+<body bgcolor="GRAY">
 	<h1 style="padding-left: 350px">HR Dashbord</h1>
 
 	<%
@@ -33,11 +33,11 @@ body {
 
 <a style="padding-left: 430px" href="DisplayPositionServlet"><font style="color: white" >DISPLAY POSITIONS</font></a>
 
-<br><br><br><br><a style="padding-left: 20px" href="InterviewResultServlet"><font style="color: white">INTERVIEW RESULT</font></a>
+<br><br><br><br><a style="padding-left: 20px" href="ShowApplicantServlet"><font style="color: white">SHOW APPLICANT</font></a>
 
 <a style="padding-left: 390px" href="ShortListedApplicantServlet"><font style="color: white">SHORTLISTED</font></a>
 
-<br><br><br><br><a style="padding-left: 20px" href="ShowApplicantServlet"><font style="color: white">SHOW APPLICANT</font></a>
+<br><br><br><br><a style="padding-left: 20px" href="InterviewResultServlet"><font style="color: white">INTERVIEW RESULT</font></a>
 
 <a style="padding-left: 400px" href="JoinedEmplyoeeServlet"><font style="color: white">JOINED EMPLOYEE</font></a>
 

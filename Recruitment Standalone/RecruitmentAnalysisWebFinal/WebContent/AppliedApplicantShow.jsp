@@ -8,7 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>All Applicant Appleid</title>
 </head>
-<body>
+<style>
+body {
+        color: white;
+}
+</style>
+<body bgcolor="gray">
+<h1 align="center"><b>Applicant Applied For Postions</b></h1>
+<br><br>
+<hr>
+<br><br>
 
 	<TABLE border="2" align="center">
 		<TR>
