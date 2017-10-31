@@ -46,7 +46,9 @@ public class ApplicantDAOImplementation implements ApplicantDAOInterface {
 	 * 
 	 * @param Applicant
 	 *            object
-	 * @return null
+	 * @return applicant (newly added applicant)
+	 * @exception NullPointerException if connection is not found
+	 * @exception SQLException if query fired is wrong
 	 */
 	@Override
 	public Applicant addApplicant(Applicant applicant) {
@@ -72,26 +74,26 @@ public class ApplicantDAOImplementation implements ApplicantDAOInterface {
 	/**
 	 * This method retrieves single applicant from Applicant table
 	 * 
-	 * @param Applicatant
-	 *            id
+	 * @param Applicatant id
 	 * @return Applicant object
+	 * @exception NullPointerException if applicant Id is wrong (i.e. does not exists in table).
 	 */
 	@Override
-	public Applicant getApplicant(int appId) {
+	public Applicant getApplicant(int applicantId) {
 		logger.debug("START");
 		Applicant newApplicant = null;
 		try {
 			connection = DBConnection.getConnection();
 			PreparedStatement statement = connection
 					.prepareStatement(searchQueryOne);
-			statement.setInt(1, appId);
+			statement.setInt(1, applicantId);
 
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				String name = resultSet.getString(2);
 				String skill = resultSet.getString(3);
 				double experience = resultSet.getDouble(4);
-				Applicant candidate = new Applicant(appId, name, skill,
+				Applicant candidate = new Applicant(applicantId, name, skill,
 						experience);
 				return candidate;
 
@@ -107,6 +109,7 @@ public class ApplicantDAOImplementation implements ApplicantDAOInterface {
 	 * This method retrieves all applicants from Applicant table
 	 * 
 	 * @return List<Applicant>
+	 * @exception SQLException if query is wrong.
 	 */
 	@Override
 	public List<Applicant> getApplicants() {
@@ -136,9 +139,9 @@ public class ApplicantDAOImplementation implements ApplicantDAOInterface {
 	/**
 	 * This method updates applicant from Applicant table
 	 * 
-	 * @param Applicatant
-	 *            object
+	 * @param Applicatant object
 	 * @return true if row is updated else returns false
+	 * @exception NullPointerException if applicant is null.
 	 */
 	@Override
 	public boolean updateApplicant(Applicant applicant) {
@@ -179,27 +182,26 @@ public class ApplicantDAOImplementation implements ApplicantDAOInterface {
 	/**
 	 * This method delete single applicant from Applicant table
 	 * 
-	 * @param Applicatant
-	 *            id
-	 * @return null
+	 * @param Applicatant id
+	 * @exception NullPointerException if applicantId is not exists or already deleted
 	 */
 	@Override
-	public Applicant deleteApplicant(int appId) {
+	public Applicant deleteApplicant(int applicantId) {
 		logger.debug("START");
 		try {
-			Applicant appFromDb = getApplicant(appId);
+			Applicant appFromDb = getApplicant(applicantId);
 			PreparedStatement statement = connection.prepareCall(deleteQuery);
-			statement.setInt(1, appId);
+			statement.setInt(1, applicantId);
 			int rowUpdates = statement.executeUpdate();
 			if (rowUpdates == 1) {
 				return appFromDb;
-			}
+			}//if
 			return null;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}
+		}//catch
 		logger.debug("STOP");
 		return null;
-	}
-}
+	}//deleteApplicant
+}//ApplicantDAOImplementation class
